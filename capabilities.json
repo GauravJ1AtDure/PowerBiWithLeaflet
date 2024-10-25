@@ -1,0 +1,225 @@
+{
+    "dataRoles": [
+        {
+            "displayName": "Tooltips",
+            "name": "tooltips",
+            "kind": "Grouping"
+        },
+        {
+            "displayName": "LAT",
+            "name": "latitude",
+            "kind": "Measure"
+            
+        },
+        {
+            "displayName": "LONG",
+            "name": "longitude",
+            "kind": "Measure"
+            
+        },
+        {
+            "displayName": "City",
+            "name": "city",
+            "kind": "Grouping"
+        },
+        {
+            "displayName": "Measure Data",
+            "name": "measure",
+            "kind": "Measure"
+        }
+    ],
+    "objects": {
+        "mapsettings": {
+            "displayName": "Map Settings",
+            "properties": {
+              "tileLayerUrl": {
+                "displayName": "Tile Layer URL",
+                "type": { "text": true }
+              },
+              "tileLayerAttribution": {
+                "displayName": "Tile Layer Attribution",
+                "type": { "text": true }
+              }
+            }
+          },
+
+          "directEdit": {
+      "properties": {
+        "show": {
+          "type": {
+            "bool": true
+          }
+        },
+        "textProperty": {
+          "type": {
+            "text": true
+          }
+        },
+        "fontFamily": {
+          "type": {
+            "formatting": {
+              "fontFamily": true
+            }
+          }
+        },
+        "fontSize": {
+          "type": {
+            "formatting": {
+              "fontSize": true
+            }
+          }
+        },
+        "bold": {
+          "type": {
+            "bool": true
+          }
+        },
+        "italic": {
+          "type": {
+            "bool": true
+          }
+        },
+        "underline": {
+          "type": {
+            "bool": true
+          }
+        },
+        "fontColor": {
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "background": {
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "position": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "Left",
+                "displayName": "Left"
+              },
+              {
+                "value": "Right",
+                "displayName": "Right"
+              }
+            ]
+          }
+        },
+        "tileLayer": {
+            "type": {
+                "text": true
+              }
+          },
+          "zoomLevel":{
+            "type": {
+                "numeric": true
+              }
+          }
+
+      }
+    },
+          
+        "dataPoint": {
+            "properties": {
+                "defaultColor": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "showAllDataPoints": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "fill": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "fillRule": {
+                    "type": {
+                        "fill": {}
+                    }
+                },
+                 "fontSize": {
+                    "type": {
+                        "formatting": {
+                            "fontSize": true
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "dataViewMappings": [
+        {
+            "table": {
+                "rows": {
+                    "select": [
+                        {
+                            "for": {
+                                "in": "tooltips"
+                            }
+                        },
+                        {
+                            "for": {
+                                "in": "latitude"
+                            }
+                        },
+                        {
+                            "for": {
+                                "in": "longitude"
+                            }
+                        },
+                        {
+                            "for": {
+                                "in": "measure"
+                            }
+                        }
+                    ]
+                }
+            },
+            "categorical": {
+                "categories": {
+                    "for": {
+                        "in": "city"
+                    },
+                    "dataReductionAlgorithm": {
+                        "top": {}
+                    }
+                },
+                "values": {
+                    "select": [
+                        {"bind": {"to": "measure"}},
+                        { "bind": { "to": "latitude" } },
+                        { "bind": { "to": "longitude" } }
+                    ]
+                }
+            }
+        }
+    ],
+    "privileges": [{
+        "name": "WebAccess",
+        "essential": true,
+        "parameters": [ "https://*.opentopomap.org", "https://*.openstreetmap.org", "https://*.arcgisonline.com", "https://*.stadiamaps.com"]
+    }]
+}
